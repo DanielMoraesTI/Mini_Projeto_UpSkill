@@ -1,9 +1,9 @@
 // BankSimulator
 class Conta {
-    constructor(nome, saldo, senha) {
+    constructor(nome, saldo, pin) {
         this.nome = nome;
         this.saldo = saldo;
-        this.senha = senha;
+        this.pin = pin;
         this.historico = [];
     }
 }
@@ -13,37 +13,37 @@ class Conta {
 const conta1 = new Conta(
   nome = "Taís Dias",
   saldo = 1000.00,
-  senha = "1234"
+  pin = "1234"
 )
 console.log(conta1);
 
 const conta2 = new Conta(
     nome = 'Daniel Moraes',
     saldo = 1500,
-    senha = '135',
+    pin = '135',
 )
 console.log(conta2);
 
 const conta3 = new Conta(
   nome = "Tereza Dias",
   saldo = 10000.00,
-  senha = "1357"
+  pin = "1357"
 )
 console.log(conta3);
 
 const conta4 = new Conta(
     nome = 'Elane Assis',
     saldo = 3000,
-    senha = '246',
+    pin = '246',
 )
 console.log(conta4);
 
 
 
 // Funções
-function levantar(conta, valor, senha) {
-    if (senha !== conta.senha) {
-        console.log("Senha incorreta.");
+function levantar(conta, valor, pin) {
+    if (pin !== conta.pin) {
+        console.log("pin incorreta.");
         return;
     }  if (valor > conta.saldo) {
         console.log("Saldo insuficiente.");
@@ -58,19 +58,15 @@ function depositar(conta, valor) {
         console.log("O valor do depósito deve ser positivo.");
     }
     conta.saldo += valor;
-    conta.historico.push({ tipo: 'depósito', valor: valor });
+    conta.historico.push({tipo: 'depósito', valor: valor });
 }
 
-function consultarSaldo(conta, senha) {
-    if (senha !== conta.senha) {
-        console.log("Senha incorreta.");
+function consultarSaldo(conta, pin) {
+    if (pin !== conta.pin) {
+        console.log("pin incorreta.");
         return;
     }   else {
-        console.log(`Saldo atual: R$ ${conta.saldo.toFixed(2)}`);
+        console.log(`Saldo atual: € ${conta.saldo.toFixed(2)}`);
     }
 }
-consultarSaldo(conta1, "1234");
 
-function transferencia(conta, valor, senha) {
-  
-}
