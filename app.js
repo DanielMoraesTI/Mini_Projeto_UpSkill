@@ -21,9 +21,17 @@ const conta4 = new Conta(
 )
 console.log(conta4);
 
-function levantarConta(nome, saldo, senha) {
-    return new Conta(nome, saldo, senha);
-}
+function levantar(conta, valor, senha) {
+    if (senha !== conta.senha) {
+        console.log("Senha incorreta.");
+        return;
+    }  if (valor > conta.saldo) {
+        console.log("Saldo insuficiente.");
+        return;
+    }  
+    conta.saldo -= valor;
+    conta.historico.push({ tipo: 'levantamento', valor: valor });
+}  
 
 function depositar(conta, valor) {
     if (valor <= 0) {
