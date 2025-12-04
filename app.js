@@ -1,4 +1,12 @@
 // BankSimulator
+class Conta {
+    constructor(nome, saldo, senha) {
+        this.nome = nome;
+        this.saldo = saldo;
+        this.senha = senha;
+        this.historico = [];
+    }
+}
 
 const conta1 = new Conta(
   nome = "Taís Dias",
@@ -6,6 +14,14 @@ const conta1 = new Conta(
   senha = "1234"
 )
 console.log(conta1);
+
+
+const conta2 = new Conta(
+    nome = 'Daniel Moraes',
+    saldo = 1500,
+    senha = '135',
+)
+console.log(conta2);
 
 
 const conta3 = new Conta(
@@ -16,26 +32,6 @@ const conta3 = new Conta(
 console.log(conta3);
 
 
-
-
-
-
-class Conta {
-    constructor(nome, saldo, senha) {
-        this.nome = nome;
-        this.saldo = saldo;
-        this.senha = senha;
-        this.historico = [];
-    }
-}
-
-const conta2 = new Conta(
-    nome = 'Daniel Moraes',
-    saldo = 1500,
-    senha = '135',
-)
-console.log(conta2);
-
 const conta4 = new Conta(
     nome = 'Elane Assis',
     saldo = 3000,
@@ -43,6 +39,9 @@ const conta4 = new Conta(
 )
 console.log(conta4);
 
+
+
+// Funções
 function levantar(conta, valor, senha) {
     if (senha !== conta.senha) {
         console.log("Senha incorreta.");
