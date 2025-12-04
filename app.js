@@ -83,9 +83,27 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
     console.log(`Transferência ${contaOrigem.nome}, no valor de €${valor.toFixed(2)} para ${contaDestino.nome} efetuada com sucesso.`);
 }
 
+ function alterarPin(conta, pin, novaPin) {
+    if(conta.pin !== pin) {
+        console.log("PIN inválido");
+        return;
+    }
+    conta.pin = novaPin;
+    console.log("PIN alterado com sucesso");
+ }
+ alterarPin(conta1, "1234", "0987");
+ console.log(conta1);
+
+
+
+
+
+// Operações
+/*
 transferencia(conta1, conta4, 250, "1234");
 console.log(conta1);
 console.log(conta4);
+*/
 
 
 
