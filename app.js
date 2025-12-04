@@ -71,6 +71,27 @@ function consultarSaldo(conta, senha) {
 }
 consultarSaldo(conta1, "1234");
 
-function transferencia(conta, valor, senha) {
-  
+function transferencia(contaOrigem, contaDestino, valor, senha) {
+    if (senha !== contaOrigem.senha) {
+        console.log("Senha incorreta.");
+        return;
+    } if (valor > 0 && valor <= contaOrigem) {
+        console.log("Saldo insuficiente");
+        return;
+    }
+    contaOrigem.saldo -= valor;
+    contaDestino.saldo += valor;
 }
+
+transferencia(conta1, conta4, 0, 1235);
+console.log(consultarSaldo(conta1));
+
+
+
+
+
+
+
+
+
+
