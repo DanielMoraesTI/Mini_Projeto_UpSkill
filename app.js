@@ -10,9 +10,16 @@ class Conta {
 const conta2 = new Conta(
     nome = 'Daniel Moraes',
     saldo = 1500,
-    senha = 'daniel123',
+    senha = '135',
 )
 console.log(conta2);
+
+const conta4 = new Conta(
+    nome = 'Elane Assis',
+    saldo = 3000,
+    senha = '246',
+)
+console.log(conta4);
 
 function levantarConta(nome, saldo, senha) {
     return new Conta(nome, saldo, senha);
