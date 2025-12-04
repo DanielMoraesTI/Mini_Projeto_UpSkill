@@ -1,9 +1,9 @@
 // BankSimulator
 class Conta {
-    constructor(nome, saldo, senha) {
+    constructor(nome, saldo, pin) {
         this.nome = nome;
         this.saldo = saldo;
-        this.senha = senha;
+        this.pin = pin;
         this.historico = [];
     }
 }
@@ -13,37 +13,37 @@ class Conta {
 const conta1 = new Conta(
   nome = "Taís Dias",
   saldo = 1000.00,
-  senha = "1234"
+  pin = "1234"
 )
 console.log(conta1);
 
 const conta2 = new Conta(
     nome = 'Daniel Moraes',
     saldo = 1500,
-    senha = '135',
+    pin = '135',
 )
 console.log(conta2);
 
 const conta3 = new Conta(
   nome = "Tereza Dias",
   saldo = 10000.00,
-  senha = "1357"
+  pin = "1357"
 )
 console.log(conta3);
 
 const conta4 = new Conta(
     nome = 'Elane Assis',
     saldo = 3000,
-    senha = '246',
+    pin = '246',
 )
 console.log(conta4);
 
 
 
 // Funções
-function levantar(conta, valor, senha) {
-    if (senha !== conta.senha) {
-        console.log("Senha incorreta.");
+function levantar(conta, valor, pin) {
+    if (pin !== conta.pin) {
+        console.log("PIN incorreto.");
         return;
     }  if (valor > conta.saldo) {
         console.log("Saldo insuficiente.");
@@ -58,22 +58,21 @@ function depositar(conta, valor) {
         console.log("O valor do depósito deve ser positivo.");
     }
     conta.saldo += valor;
-    conta.historico.push({ tipo: 'depósito', valor: valor });
+    conta.historico.push({tipo: 'depósito', valor: valor });
 }
 
-function consultarSaldo(conta, senha) {
-    if (senha !== conta.senha) {
-        console.log("Senha incorreta.");
+function consultarSaldo(conta, pin) {
+    if (pin !== conta.pin) {
+        console.log("PIN incorreto.");
         return;
     }   else {
-        console.log(`Saldo atual: R$ ${conta.saldo.toFixed(2)}`);
+        console.log(`Saldo atual: € ${conta.saldo.toFixed(2)}`);
     }
 }
-consultarSaldo(conta1, "1234");
 
-function transferencia(contaOrigem, contaDestino, valor, senha) {
-    if (senha !== contaOrigem.senha) {
-        console.log("Senha incorreta.");
+function transferencia(contaOrigem, contaDestino, valor, pin) {
+    if (pin !== contaOrigem.pin) {
+        console.log("PIN incorreto.");
         return;
     } if (valor > 0 && valor <= contaOrigem) {
         console.log("Saldo insuficiente");
@@ -81,13 +80,12 @@ function transferencia(contaOrigem, contaDestino, valor, senha) {
     }
     contaOrigem.saldo -= valor;
     contaDestino.saldo += valor;
+    console.log(`Transferência ${contaOrigem.nome}, no valor de €${valor.toFixed(2)} para ${contaDestino.nome} efetuada com sucesso.`);
 }
 
-transferencia(conta1, conta4, 0, 1235);
-console.log(consultarSaldo(conta1));
-
-
-
+transferencia(conta1, conta4, 250, "1234");
+console.log(conta1);
+console.log(conta4);
 
 
 
