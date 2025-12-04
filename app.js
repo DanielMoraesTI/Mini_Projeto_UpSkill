@@ -8,13 +8,14 @@ class Conta {
     }
 }
 
+
+// Criação das contas
 const conta1 = new Conta(
   nome = "Taís Dias",
   saldo = 1000.00,
   senha = "1234"
 )
 console.log(conta1);
-
 
 const conta2 = new Conta(
     nome = 'Daniel Moraes',
@@ -23,14 +24,12 @@ const conta2 = new Conta(
 )
 console.log(conta2);
 
-
 const conta3 = new Conta(
   nome = "Tereza Dias",
   saldo = 10000.00,
   senha = "1357"
 )
 console.log(conta3);
-
 
 const conta4 = new Conta(
     nome = 'Elane Assis',
@@ -70,4 +69,8 @@ function consultarSaldo(conta, senha) {
         console.log(`Saldo atual: R$ ${conta.saldo.toFixed(2)}`);
     }
 }
+consultarSaldo(conta1, "1234");
 
+function transferencia(conta, valor, senha) {
+  
+}
