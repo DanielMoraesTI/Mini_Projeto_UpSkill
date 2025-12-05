@@ -34,6 +34,7 @@ function levantar(conta, valor, pin) {
     conta.saldo -= valor;
     conta.historico.push({tipo: "Levantamento", valor: valor.toFixed(2)});
     extratoGlobal.push({tipo: "Levantamento", valor: valor.toFixed(2), nome: conta.nome});
+    console.log(`Levantamento no valor de ${valor.toFixed(2)} € efetuado com sucesso`);
 }
 
 
@@ -92,15 +93,15 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
  }
 
 
- function capitalTotal(arrContas) {
-    const total = arrContas.reduce((acc, t) => acc + t.saldo, 0);
+ function capitalTotal(contas) {
+    const total = contas.reduce((acc, t) => acc + t.saldo, 0);
     console.log(`Capital Total: ${total.toFixed(2)} €`);
  }
 
 
-function clientesVip(arrayContas) {
+function clientesVip(contas) {
     // verifica as contas que possuem saldo acima do valor mínimo
-    const contasVip = arrayContas.filter(c => c.saldo >= valorMinimoVip)
+    const contasVip = contas.filter(c => c.saldo >= valorMinimoVip)
     // caso ninguém tenha o valor mínimo em conta
     if (contasVip.length === 0) {
         console.log("Nenhum cliente VIP encontrado");
@@ -137,7 +138,6 @@ function poupanca(conta, pin) {
     console.log(`A sua poupança rendeu ${rendimento.toFixed(2)} €`);
     conta.saldo += rendimento;  
     conta.historico.push({tipo: "Poupança", valor: rendimento.toFixed(2)});
-    extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
 }
 
 //Segunda operação adicional consulta para verificar taxa de câmbio para eventual conversão
@@ -219,6 +219,7 @@ function main () {
     console.log(conta3);
     console.log(conta4);
 
+    console.log("\nExtrato Global");
     exibirExtratoGlobal();
 }
 
