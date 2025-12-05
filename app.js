@@ -161,7 +161,7 @@ function avisoClienteVip(conta) {
 
 
 
-/*function main () {
+function main () {
     // Testes
     console.log("Levantamento");
     levantar(conta1, 100, "1134"); // pin incorreto
@@ -173,6 +173,10 @@ function avisoClienteVip(conta) {
     console.log("\nDepósito");
     depositar(conta2, 0);   // deposito com valor igual a 0
     depositar(conta4, 500); // depósito efetuado
+    depositar(conta4, 300); // depósito efetuado
+    depositar(conta3, 100); // depósito efetuado
+    depositar(conta1, 200); // depósito efetuado
+    depositar(conta2, 400); // depósito efetuado
     console.log(conta4);    // exibe a conta com o saldo atualizado
 
 
@@ -183,8 +187,10 @@ function avisoClienteVip(conta) {
 
     console.log("\nTransferência");
     transferencia(conta1, conta4, 250, "1234");  //faz a transferÊncia
+    transferencia(conta2, conta3, 70, "135"); // saldo insuficiente
     console.log(conta1);    // exibe as contas com os saldos atualizados
     console.log(conta4);
+    transferencia(conta1, conta2, 50, "1234");
 
 
     console.log("\nAlteração do PIN");
@@ -212,9 +218,10 @@ function avisoClienteVip(conta) {
     console.log(conta2);
     console.log(conta3);
     console.log(conta4);
+
+    exibirExtratoGlobal();
 }
 
 main();
 
 
-exibirExtratoGlobal();*/
