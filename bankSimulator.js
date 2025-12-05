@@ -27,8 +27,6 @@ const saldoInsuficiente = "Saldo insuficiente.";
 
 // Funções
 function levantar(conta, valor, pin) {
-    //let pinIncorreto = "PIN incorreto.";
-    //let saldoInsuficiente = "Saldo insuficiente.";
     let mensagemSucesso = `Levantamento no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
     if (pin !== conta.pin) {
         return pinIncorreto;
@@ -55,7 +53,6 @@ function depositar(conta, valor) {
 
 
 function consultarSaldo(conta, pin) {
-    //let mensagemPin = "PIN incorreto.";
     let mensagemSaldo = `Saldo atual: ${conta.saldo.toFixed(2)} €`;
     if (pin !== conta.pin) {
         return pinIncorreto;
@@ -67,8 +64,6 @@ function consultarSaldo(conta, pin) {
 
 
 function transferencia(contaOrigem, contaDestino, valor, pin) {
-    //let pinIncorreto = "PIN incorreto.";
-    //let saldoInsuficiente = "Saldo insuficiente.";
     let transferenciaRealizada = `Transferência de ${contaOrigem.nome}, no valor de ${valor.toFixed(2)} € para ${contaDestino.nome} efetuada com sucesso.`;
 
     if (pin !== contaOrigem.pin) {
@@ -87,7 +82,6 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
 
 
  function alterarPin(conta, pin, novoPin) {
-    //let pinInvalido = "PIN inválido";
     let novoPinInvalido = "Não foi possível alterar o seu PIN";
     let pinAlterado = `${conta.nome}, seu PIN foi alterado com sucesso`;
 
@@ -104,8 +98,8 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
 
 
  function capitalTotal(arrContas) {
-    let somaTotal = `Capital Total: ${total.toFixed(2)} €`
     const total = arrContas.reduce((acc, t) => acc + t.saldo, 0);
+    let somaTotal = `Capital Total: ${total.toFixed(2)} €`;
     return somaTotal;
  }
 
@@ -141,9 +135,6 @@ function exibirExtratoGlobal() {
 
 // Uma das operações adicionais
 function poupanca(conta, pin) {
-    //let mensagemPin = "PIN inválido";
-    //let mensagemSaldo = "Saldo insuficiente para aplicar na poupança.";
-    let mensagemRendimento = `A sua poupança rendeu ${rendimento.toFixed(2)} €`;
     if (pin !== conta.pin) {
         return pinIncorreto;
     }
@@ -155,6 +146,7 @@ function poupanca(conta, pin) {
     conta.saldo += rendimento;  
     conta.historico.push({tipo: "Poupança", valor: rendimento.toFixed(2)});
     extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
+    let mensagemRendimento = `A sua poupança rendeu ${rendimento.toFixed(2)} €`;
     return mensagemRendimento;
 }
 
@@ -178,9 +170,7 @@ function avisoClienteVip(conta) {
     }
 }
 
-
-
-
+// Função principal para testar as funcionalidades
 function main () {
     // Testes
     console.log("Levantamento");
