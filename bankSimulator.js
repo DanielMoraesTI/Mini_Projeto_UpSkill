@@ -122,6 +122,7 @@ function clientesVip(contas) {
     return listaVip;
 }
 
+
 // Função para exibir o extrato global
 function exibirExtratoGlobal() {
     let resultado = "";
@@ -174,53 +175,53 @@ function avisoClienteVip(conta) {
 function main () {
     // Testes
     console.log("Levantamento");
-    levantar(conta1, 100, "1134"); // pin incorreto
-    levantar(conta2, 2000, "135"); // saldo insuficiente
-    levantar(conta3, 150, "1357"); // levantamento efetuado com sucesso
+    console.log(levantar(conta1, 100, "1134")); // pin incorreto
+    console.log(levantar(conta2, 2000, "135")); // saldo insuficiente
+    console.log(levantar(conta3, 150, "1357")); // levantamento efetuado com sucesso
     console.log(conta3);
 
 
     console.log("\nDepósito");
-    depositar(conta2, 0);   // deposito com valor igual a 0
-    depositar(conta4, 500); // depósito efetuado
-    depositar(conta4, 300); // depósito efetuado
-    depositar(conta3, 100); // depósito efetuado
-    depositar(conta1, 200); // depósito efetuado
-    depositar(conta2, 400); // depósito efetuado
+    console.log(depositar(conta2, 0));   // deposito com valor igual a 0
+    console.log(depositar(conta4, 500)); // depósito efetuado
+    console.log(depositar(conta4, 300)); // depósito efetuado
+    console.log(depositar(conta3, 100)); // depósito efetuado
+    console.log(depositar(conta1, 200)); // depósito efetuado
+    console.log(depositar(conta2, 400)); // depósito efetuado
     console.log(conta4);    // exibe a conta com o saldo atualizado
 
 
     console.log("\nConsulta de Saldo");
-    consultarSaldo(conta2, "125");  // solicita o saldo, com PIN incorreto
-    consultarSaldo(conta4, "246");  // PIN correto, exibe o saldo
+    console.log(consultarSaldo(conta2, "125"));  // solicita o saldo, com PIN incorreto
+    console.log(consultarSaldo(conta4, "246"));  // PIN correto, exibe o saldo
 
 
     console.log("\nTransferência");
-    transferencia(conta1, conta4, 250, "1234");  //faz a transferÊncia
-    transferencia(conta2, conta3, 70, "135"); // saldo insuficiente
+    console.log(transferencia(conta1, conta4, 250, "1234"));  //faz a transferÊncia
+    console.log(transferencia(conta2, conta3, 70, "135")); // saldo insuficiente
     console.log(conta1);    // exibe as contas com os saldos atualizados
     console.log(conta4);
-    transferencia(conta1, conta2, 50, "1234");
-
+    console.log(transferencia(conta1, conta2, 50, "1234"));
 
     console.log("\nAlteração do PIN");
-    alterarPin(conta3, "1356", "1122"); // pin inválido
-    alterarPin(conta1, "1234");         // novoPin vazio
-    alterarPin(conta1, "1234", "0987"); // alteração efetuada
+    console.log(alterarPin(conta3, "1356", "1122")); // pin inválido
+    console.log(alterarPin(conta1, "1234"));         // novoPin vazio
+    console.log(alterarPin(conta1, "1234", "0987")); // alteração efetuada
     console.log(conta1);                // exibe a conta com o pin alterado
 
 
     console.log("\nCapital Total");
-    capitalTotal(contas);
+    console.log(capitalTotal(contas));
 
 
     console.log("\nClientesVIP");
-    clientesVip(contas);
+    console.log(clientesVip(contas));
 
 
     console.log("\nPoupança");
-    poupanca(conta1, "1233");
-    poupanca(conta2, "135");
+    console.log(poupanca(conta1, "1233"));// pin incorreto
+    console.log(poupanca(conta4, "246")); //saldo poupança atualizado
+    console.log(poupanca(conta2, "135")); //saldo poupança atualizado
     console.log(conta2);
 
 
@@ -234,5 +235,3 @@ function main () {
 }
 
 main();
-
-
