@@ -178,7 +178,6 @@ function main () {
     console.log(levantar(conta3, 150, "1357")); // levantamento efetuado com sucesso
     console.log(conta3); // exibe a conta com o saldo atualizado
 
-
     console.log("\nDepósito");
     console.log(depositar(conta2, 0));   // deposito com valor igual a 0
     console.log(depositar(conta4, 500)); // depósito efetuado
@@ -204,21 +203,17 @@ function main () {
     console.log(alterarPin(conta1, "1234", "0987")); // alteração efetuada
     console.log(conta1);                // exibe a conta com o pin alterado
 
-
     console.log("\nCapital Total");
     console.log(capitalTotal(contas));
 
-
     console.log("\nClientesVIP");
     console.log(clientesVip(contas));
-
 
     console.log("\nPoupança");
     console.log(poupanca(conta1, "1233"));// pin incorreto
     console.log(poupanca(conta4, "246")); //saldo poupança atualizado
     console.log(poupanca(conta2, "135")); //saldo poupança atualizado
     console.log(conta2);
-
 
     console.log(conta1);
     console.log(conta2);
@@ -227,7 +222,6 @@ function main () {
 
     console.log("\nConsulta Extrato Global");
     console.log(exibirExtratoGlobal());
-
 }
 
 main();
