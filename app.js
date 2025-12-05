@@ -91,9 +91,9 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
  }
 
 
-function clientesVip(arrayContas) {
+function clientesVip(contas) {
     // verifica as contas que possuem saldo acima do valor mínimo
-    const contasVip = arrayContas.filter(c => c.saldo >= valorMinimoVip)
+    const contasVip = contas.filter(c => c.saldo >= valorMinimoVip)
     // caso ninguém tenha o valor mínimo em conta
     if (contasVip.length === 0) {
         return "Nenhum cliente VIP encontrado";
