@@ -21,16 +21,19 @@ const contas = [conta1, conta2, conta3, conta4];
 const extratoGlobal = [];
 //valor para ser cliente VIP
 const valorMinimoVip = 5000;
+// Mensagens comuns
+const pinIncorreto = "PIN incorreto.";
+const saldoInsuficiente = "Saldo insuficiente.";
 
 // Funções
 function levantar(conta, valor, pin) {
-    let mensagemincorreto = "PIN incorreto.";
-    let mensagemSaldo = "Saldo insuficiente.";
+    //let pinIncorreto = "PIN incorreto.";
+    //let saldoInsuficiente = "Saldo insuficiente.";
     let mensagemSucesso = `Levantamento no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
     if (pin !== conta.pin) {
-        return mensagemincorreto;
+        return pinIncorreto;
     }  if (valor > conta.saldo) {
-        return mensagemSaldo;
+        return saldoInsuficiente;
     }  
     conta.saldo -= valor;
     conta.historico.push({tipo: "Levantamento", valor: valor.toFixed(2)});
@@ -40,30 +43,38 @@ function levantar(conta, valor, pin) {
 
 
 function depositar(conta, valor) {
+    let mensagemValor = "O valor do depósito deve ser acima de 0 €";
+    let mensagemDeposito = `Depósito no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
     if (valor <= 0) {
-        return "O valor do depósito deve ser acima de 0 €"
+        return mensagemValor;
     }
     conta.saldo += valor;
     conta.historico.push({tipo: "Depósito", valor: valor.toFixed(2) });
-    return `Depósito no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
+    return mensagemDeposito;
 }
 
 
 function consultarSaldo(conta, pin) {
+    //let mensagemPin = "PIN incorreto.";
+    let mensagemSaldo = `Saldo atual: ${conta.saldo.toFixed(2)} €`;
     if (pin !== conta.pin) {
-        return "PIN incorreto."
+        return pinIncorreto;
     }   else {
         conta.historico.push({tipo: "Consultar saldo"});
-        return `Saldo atual: ${conta.saldo.toFixed(2)} €`;
+        return mensagemSaldo;
     }
 }
 
 
 function transferencia(contaOrigem, contaDestino, valor, pin) {
+    //let pinIncorreto = "PIN incorreto.";
+    //let saldoInsuficiente = "Saldo insuficiente.";
+    let transferenciaRealizada = `Transferência de ${contaOrigem.nome}, no valor de ${valor.toFixed(2)} € para ${contaDestino.nome} efetuada com sucesso.`;
+
     if (pin !== contaOrigem.pin) {
-        return "PIN incorreto.";
+        return pinIncorreto;
     } if (valor > contaOrigem.saldo) {
-        return "Saldo insuficiente.";
+        return saldoInsuficiente;
     }
     contaOrigem.saldo -= valor;
     contaDestino.saldo += valor;
@@ -71,42 +82,50 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
     extratoGlobal.push({tipo: "Transfêrencia - enviada", valor: valor.toFixed(2), nome: contaOrigem.nome});
     contaDestino.historico.push({tipo: "Transfêrencia - recebida", valor: valor.toFixed(2)});
     extratoGlobal.push({tipo: "Transfêrencia - recebida", valor: valor.toFixed(2), nome: contaDestino.nome});
-    return `Transferência de ${contaOrigem.nome}, no valor de ${valor.toFixed(2)} € para ${contaDestino.nome} efetuada com sucesso.`;
+    return transferenciaRealizada;
 }
 
 
  function alterarPin(conta, pin, novoPin) {
+    //let pinInvalido = "PIN inválido";
+    let novoPinInvalido = "Não foi possível alterar o seu PIN";
+    let pinAlterado = `${conta.nome}, seu PIN foi alterado com sucesso`;
+
     if (conta.pin !== pin) {
-        return "PIN inválido";
+        return pinIncorreto;
     }
     if (!novoPin || novoPin === 0) {
-        return "Não foi possível alterar o seu PIN";
+        return novoPinInvalido;
     }
     conta.pin = novoPin;
     conta.historico.push({tipo: "Alteração de senha"});
-    return `${conta.nome}, seu PIN foi alterado com sucesso`;
+    return pinAlterado;
  }
 
 
  function capitalTotal(arrContas) {
+    let somaTotal = `Capital Total: ${total.toFixed(2)} €`
     const total = arrContas.reduce((acc, t) => acc + t.saldo, 0);
-    return `Capital Total: ${total.toFixed(2)} €`;
+    return somaTotal;
  }
 
 
 function clientesVip(contas) {
+    let nenhumVip = "Nenhum cliente VIP encontrado";
+    let listaVip = ""
     // verifica as contas que possuem saldo acima do valor mínimo
     const contasVip = contas.filter(c => c.saldo >= valorMinimoVip)
     // caso ninguém tenha o valor mínimo em conta
     if (contasVip.length === 0) {
-        return "Nenhum cliente VIP encontrado";
+        return nenhumVip;
     }
     // extrai apenas os nomes dos titulares das contas VIP
     const titulares = contasVip.map(c =>c.nome);
     console.log("Lista de Clientes VIP");
     for (let i = 0; i < titulares.length; i++) {
-        return `O(a) cliente ${titulares[i]} faz parte do grupo VIP`;
+        listaVip += `O(a) cliente ${titulares[i]} faz parte do grupo VIP\n`;
     }
+    return listaVip;
 }
 
 // Função para exibir o extrato global
@@ -122,34 +141,40 @@ function exibirExtratoGlobal() {
 
 // Uma das operações adicionais
 function poupanca(conta, pin) {
+    //let mensagemPin = "PIN inválido";
+    //let mensagemSaldo = "Saldo insuficiente para aplicar na poupança.";
+    let mensagemRendimento = `A sua poupança rendeu ${rendimento.toFixed(2)} €`;
     if (pin !== conta.pin) {
-        return "PIN inválido";
+        return pinIncorreto;
     }
     if (conta.saldo <= 0) {
-        return "Saldo insuficiente";
+        return saldoInsuficiente;
     }
     const percentual = 6.17;
     let rendimento = conta.saldo * (percentual / 100);
     conta.saldo += rendimento;  
     conta.historico.push({tipo: "Poupança", valor: rendimento.toFixed(2)});
     extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
-    return `A sua poupança rendeu ${rendimento.toFixed(2)} €`;
+    return mensagemRendimento;
 }
 
 //Segunda operação adicional consulta para verificar taxa de câmbio para eventual conversão
 function consultaEuroReal(valorEuro) {
+    let mensagemConversao = `O valor de ${valorEuro.toFixed(2)} € convertido para reais é R$ ${valorConvertido.toFixed(2)}`;
     const taxaCambio = 6.20;
     let valorConvertido = valorEuro * taxaCambio;
-    return `O valor de ${valorEuro.toFixed(2)} € convertido para reais é R$ ${valorConvertido.toFixed(2)}`;
+    return mensagemConversao;
 }
 
 
 // Terceira operação adicional (avisar quanto falta para se tornar um cliente VIP)
 function avisoClienteVip(conta) {
+    let voceVip = `Parabéns ${conta.nome}, você é um cliente VIP!`;
+    let quaseVip = `Olá ${conta.nome}, você não é um cliente VIP. Deposite mais ${ (valorMinimoVip - conta.saldo).toFixed(2)} € para se tornar um!`;
     if (conta.saldo >= valorMinimoVip) {
-        return `Parabéns ${conta.nome}, você é um cliente VIP!`;
+        return voceVip;
     } else {
-        return `Olá ${conta.nome}, você não é um cliente VIP. Deposite mais ${ (valorMinimoVip - conta.saldo).toFixed(2)} € para se tornar um!`;
+        return quaseVip;
     }
 }
 
