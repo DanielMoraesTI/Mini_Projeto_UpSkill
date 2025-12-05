@@ -10,34 +10,13 @@ class Conta {
 
 
 // Criação das contas
-const conta1 = new Conta(
-  nome = "Taís Dias",
-  saldo = 1000.00,
-  pin = "1234"
-)
-console.log(conta1);
+const conta1 = new Conta("Taís Dias", 1000, "1234");
+const conta2 = new Conta('Daniel Moraes', 1500, '135');
+const conta3 = new Conta("Tereza Dias", 10000, "1357");
+const conta4 = new Conta('Elane Assis', 3000, '246');
 
-const conta2 = new Conta(
-    nome = 'Daniel Moraes',
-    saldo = 1500,
-    pin = '135',
-)
-console.log(conta2);
-
-const conta3 = new Conta(
-  nome = "Tereza Dias",
-  saldo = 10000.00,
-  pin = "1357"
-)
-console.log(conta3);
-
-const conta4 = new Conta(
-    nome = 'Elane Assis',
-    saldo = 3000,
-    pin = '246',
-)
-console.log(conta4);
-
+// array de contas (penso que seria mais interessante criar uma função criarContas, que "criasse as novas contas" e fizesse um push neste array)
+const contas = [conta1, conta2, conta3, conta4];
 
 
 // Funções
@@ -50,64 +29,218 @@ function levantar(conta, valor, pin) {
         return;
     }  
     conta.saldo -= valor;
-    conta.historico.push({ tipo: 'levantamento', valor: valor });
-}  
+    conta.historico.push({tipo: "Levantamento", valor: valor.toFixed(2)});
+}
+
 
 function depositar(conta, valor) {
     if (valor <= 0) {
-        console.log("O valor do depósito deve ser positivo.");
+        console.log("O valor do depósito deve ser acima de 0 €");
+        return;
     }
     conta.saldo += valor;
-    conta.historico.push({tipo: 'depósito', valor: valor });
+    conta.historico.push({tipo: "Depósito", valor: valor.toFixed(2) });
+    console.log(`Depósito no valor de ${valor.toFixed(2)} € efetuado com sucesso`);
 }
+
 
 function consultarSaldo(conta, pin) {
     if (pin !== conta.pin) {
-        console.log("PIN incorreto.");
+        console.log("PIN incorreto");
         return;
     }   else {
-        console.log(`Saldo atual: € ${conta.saldo.toFixed(2)}`);
+        console.log(`Saldo atual: ${conta.saldo.toFixed(2)} €`);
+        conta.historico.push({tipo: "Consultar saldo"});
     }
 }
 
+
 function transferencia(contaOrigem, contaDestino, valor, pin) {
     if (pin !== contaOrigem.pin) {
-        console.log("PIN incorreto.");
+        console.log("PIN incorreto");
         return;
-    } if (valor > 0 && valor <= contaOrigem) {
+    } if (valor > contaOrigem.saldo) {
         console.log("Saldo insuficiente");
         return;
     }
     contaOrigem.saldo -= valor;
     contaDestino.saldo += valor;
-    console.log(`Transferência ${contaOrigem.nome}, no valor de €${valor.toFixed(2)} para ${contaDestino.nome} efetuada com sucesso.`);
+    console.log(`Transferência de ${contaOrigem.nome}, no valor de ${valor.toFixed(2)} € para ${contaDestino.nome} efetuada com sucesso.`);
+    contaOrigem.historico.push({tipo: "Transfêrencia - enviada", valor: valor.toFixed(2)});
+    contaDestino.historico.push({tipo: "Transfêrencia - recebida", valor: valor.toFixed(2)});
 }
 
- function alterarPin(conta, pin, novaPin) {
-    if(conta.pin !== pin) {
+
+ function alterarPin(conta, pin, novoPin) {
+    if (conta.pin !== pin) {
         console.log("PIN inválido");
         return;
     }
-    conta.pin = novaPin;
-    console.log("PIN alterado com sucesso");
+    if (!novoPin || novoPin === 0) {
+        console.log("Não foi possível alterar o seu PIN");
+        return;
+    }
+    conta.pin = novoPin;
+    console.log(conta.nome + ", seu PIN foi alterado com sucesso");
+    conta.historico.push({tipo: "Alteração de senha"});
  }
- alterarPin(conta1, "1234", "0987");
- console.log(conta1);
 
 
+ function capitalTotal(arrContas) {
+    const total = arrContas.reduce((acc, t) => acc + t.saldo, 0);
+    console.log(`Capital Total: ${total.toFixed(2)} €`);
+ }
 
 
+function clientesVip(arrayContas) {
+    const valorMinimoVip = 5000;
+    // verifica as contas que possuem saldo acima do valor mínimo
+    const contasVip = arrayContas.filter(c => c.saldo >= valorMinimoVip)
+    // caso ninguém tenha o valor mínimo em conta
+    if (contasVip.length === 0) {
+        console.log("Nenhum cliente VIP encontrado");
+        return;
+    }
+    // extrai apenas os nomes dos titulares das contas VIP
+    const titulares = contasVip.map(c =>c.nome);
+    console.log("Lista de Clientes VIP");
+    for (let i = 0; i < titulares.length; i++) {
+        console.log(`O(a) cliente ${titulares[i]} faz parte do grupo VIP`);
+    }
+}
 
-// Operações
+
+// Uma das operações adicionais
+function poupanca(conta, pin) {
+    if (pin !== conta.pin) {
+        console.log("PIN inválido");
+        return;
+    }
+    if (conta.saldo <= 0) {
+        console.log("Saldo insuficiente");
+        return;
+    }
+    const percentual = 6.17;
+    let rendimento = conta.saldo * (percentual / 100);
+    console.log(`A sua poupança rendeu ${rendimento.toFixed(2)} €`);
+    conta.saldo -= rendimento;  // ERRO DE LÓGICA -> deveria ser +=
+    conta.historico.push({tipo: "Poupança", valor: rendimento.toFixed(2)});
+}
+
+// Este erro, faz com que o rendimento seja subtraído da conta, aos invés de acrescentado. 
+
+
+function main () {
+    // Testes
+    console.log("Levantamento");
+    levantar(conta1, 100, "1134"); // pin incorreto
+    levantar(conta2, 2000, "135"); // saldo insuficiente
+    levantar(conta3, 150, "1357"); // levantamento efetuado com sucesso
+    console.log(conta3);
+
+
+    console.log("\nDepósito");
+    depositar(conta2, 0);   // deposito com valor igual a 0
+    depositar(conta4, 500); // depósito efetuado
+    console.log(conta4);    // exibe a conta com o saldo atualizado
+
+
+    console.log("\nConsulta de Saldo");
+    consultarSaldo(conta2, "125");  // solicita o saldo, com PIN incorreto
+    consultarSaldo(conta4, "246");  // PIN correto, exibe o saldo
+
+
+    console.log("\nTransferência");
+    transferencia(conta1, conta4, 250, "1234");  //faz a transferÊncia
+    console.log(conta1);    // exibe as contas com os saldos atualizados
+    console.log(conta4);
+
+
+    console.log("\nAlteração do PIN");
+    alterarPin(conta3, "1356", "1122"); // pin inválido
+    alterarPin(conta1, "1234");         // novoPin vazio
+    alterarPin(conta1, "1234", "0987"); // alteração efetuada
+    console.log(conta1);                // exibe a conta com o pin alterado
+
+
+    console.log("\nCapital Total");
+    capitalTotal(contas);
+
+
+    console.log("\nClientesVIP");
+    clientesVip(contas);
+
+
+    console.log("\nPoupança");
+    poupanca(conta1, "1233");
+    poupanca(conta2, "135");
+    console.log(conta2);
+
+
+    console.log(conta1);
+    console.log(conta2);
+    console.log(conta3);
+    console.log(conta4);
+}
+
+main();
+
+
+// Testes
+// Levantamento
 /*
-transferencia(conta1, conta4, 250, "1234");
-console.log(conta1);
+levantar(conta1, 100, "1134"); // pin incorreto
+levantar(conta2, 2000, "135"); // saldo insuficiente
+levantar(conta3, 150, "1357"); // levantamento efetuado com sucesso
+console.log(conta3);
+*/
+
+
+// Depósito
+/*
+depositar(conta2, 0);   // deposito com valor igual a 0
+depositar(conta4, 500); // depósito efetuado
+console.log(conta4);    // exibe a conta com o saldo atualizado
+*/
+
+
+// Consulta de Saldo
+/*
+consultarSaldo(conta2, "125");  // solicita o saldo, com PIN incorreto
+consultarSaldo(conta4, "246");  // PIN correto, exibe o saldo
+*/
+
+
+// Transferência
+/*
+transferencia(conta1, conta4, 250, "1234");  //faz a transferÊncia
+console.log(conta1);    // exibe as contas com os saldos atualizados
 console.log(conta4);
 */
 
 
+// Alteração do PIN
+/*
+ alterarPin(conta3, "1356", "1122"); // pin inválido
+ alterarPin(conta1, "1234");         // novoPin vazio
+ alterarPin(conta1, "1234", "0987"); // alteração efetuada
+ console.log(conta1);                // exibe a conta com o pin alterado
+*/
 
 
+// Capital Total
+// capitalTotal(contas);
 
 
+// ClientesVIP
+/*
+clientesVip(contas);
+*/
 
+
+// Poupança
+/*
+poupanca(conta1, "1233");
+poupanca(conta2, "135");
+console.log(conta2);
+*/
