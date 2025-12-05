@@ -140,7 +140,7 @@ function poupanca(conta, pin) {
     extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
 }
 
-//segunda operação adicionalconsulta para verificar taxa de câmbio para eventual conversão
+//Segunda operação adicional consulta para verificar taxa de câmbio para eventual conversão
 function consultaEuroReal(valorEuro) {
     const taxaCambio = 6.20;
     let valorConvertido = valorEuro * taxaCambio;
