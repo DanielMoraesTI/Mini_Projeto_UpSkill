@@ -69,11 +69,13 @@ O que justifica o bug escolhido, de alteração de símbolo aritmético na estru
 
 #### Fluxograma da função capitalTotal
 Representa o fluxo da função Capital Total, que calcula quanto dinheiro o banco tem guardado. Representa o início, a entrada do parâmetro conta, um array que armazena todas as contas e seus respectivos saldos; o processamento, que percorre cada conta, somando o saldo de cada uma delas à variável total, com o método reduce, que reduz todos os saldos do array a um único valor; a saída, que exibe o valor armazenado na variável total e o fim.
+
 ![Função capitalTotal](https://raw.githubusercontent.com/DanielMoraesTI/Mini_Projeto_UpSkill/95eb8e7cdfdb5ce303c64f7c159ef9f315ffbad8/CapitalTotal.png)
 
 #### Fluxograma da função levantar
 Representa o fluxo da função Levantar, que autoriza ou não o levantamento de valores monetários com base em algumas condições. Representa o início do fluxo, a entrada dos parâmetros conta, valor e PIN.
 Com base dos dados recebidos, são feitas algumas verificações e o levantamento é autorizado ou não.
+
 ![Função Levantamento](https://raw.githubusercontent.com/DanielMoraesTI/Mini_Projeto_UpSkill/95eb8e7cdfdb5ce303c64f7c159ef9f315ffbad8/Levantar.png)
 
 
