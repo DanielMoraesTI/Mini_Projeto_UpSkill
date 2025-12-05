@@ -1,4 +1,9 @@
 
+### Autores
+
+- Daniel Moraes (https://www.github.com/DanielMoraesTI)
+- Taís Dias (https://www.github.com/tai-diasl)
+
 # Tema Escolhido: Mini Projeto BankSimulator (Gestão de Contas)
 
 Um sistema bancário simplificado para gerir contas e movimentos financeiros.
@@ -75,7 +80,4 @@ Com base dos dados recebidos, são feitas algumas verificações e o levantament
 
 
 
-### Autores
 
-- Daniel Moraes (https://www.github.com/DanielMoraesTI)
-- Taís Dias (https://www.github.com/tai-diasl)
