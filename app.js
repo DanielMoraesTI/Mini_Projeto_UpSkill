@@ -24,15 +24,18 @@ const valorMinimoVip = 5000;
 
 // Funções
 function levantar(conta, valor, pin) {
+    let mensagemincorreto = "PIN incorreto.";
+    let mensagemSaldo = "Saldo insuficiente.";
+    let mensagemSucesso = `Levantamento no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
     if (pin !== conta.pin) {
-        return "PIN incorreto.";
+        return mensagemincorreto;
     }  if (valor > conta.saldo) {
-        return "Saldo insuficiente.";
+        return mensagemSaldo;
     }  
     conta.saldo -= valor;
     conta.historico.push({tipo: "Levantamento", valor: valor.toFixed(2)});
     extratoGlobal.push({tipo: "Levantamento", valor: valor.toFixed(2), nome: conta.nome});
-    return `Levantamento no valor de ${valor.toFixed(2)} € efetuado com sucesso.`;
+    return mensagemSucesso;
 }
 
 
