@@ -178,7 +178,7 @@ function main () {
     console.log(levantar(conta1, 100, "1134")); // pin incorreto
     console.log(levantar(conta2, 2000, "135")); // saldo insuficiente
     console.log(levantar(conta3, 150, "1357")); // levantamento efetuado com sucesso
-    console.log(conta3);
+    console.log(conta3); // exibe a conta com o saldo atualizado
 
 
     console.log("\nDepósito");
@@ -198,10 +198,9 @@ function main () {
 
     console.log("\nTransferência");
     console.log(transferencia(conta1, conta4, 250, "1234"));  //faz a transferÊncia
-    console.log(transferencia(conta2, conta3, 70, "135")); // saldo insuficiente
+    console.log(transferencia(conta2, conta3, 10000, "135")); // saldo insuficiente
     console.log(conta1);    // exibe as contas com os saldos atualizados
-    console.log(conta4);
-    console.log(transferencia(conta1, conta2, 50, "1234"));
+    console.log(transferencia(conta1, conta2, 50, "1234")); //faz a transferÊncia
 
     console.log("\nAlteração do PIN");
     console.log(alterarPin(conta3, "1356", "1122")); // pin inválido
