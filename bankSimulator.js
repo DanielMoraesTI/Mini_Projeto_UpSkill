@@ -13,9 +13,9 @@ class Conta {
 const conta1 = new Conta("Taís Dias", 1000, "1234");
 const conta2 = new Conta("Daniel Moraes", 1500, "135");
 const conta3 = new Conta("Tereza Dias", 10000, "1357");
-const conta4 = new Conta("Elane Assis", 4600, "246");
+const conta4 = new Conta("Elane Assis", 5000, "246");
 
-// array de contas (penso que seria mais interessante criar uma função criarContas, que "criasse as novas contas" e fizesse um push neste array)
+// array de contas 
 const contas = [conta1, conta2, conta3, conta4];
 //array para armazenar todas as operações de levantamento e transferência
 const extratoGlobal = [];
@@ -172,7 +172,6 @@ function avisoClienteVip(conta) {
 
 // Função principal para testar as funcionalidades
 function main () {
-    // Testes
     console.log("Levantamento");
     console.log(levantar(conta1, 100, "1134")); // pin incorreto
     console.log(levantar(conta2, 2000, "135")); // saldo insuficiente
@@ -189,14 +188,12 @@ function main () {
     console.log(depositar(conta2, 400)); // depósito efetuado
     console.log(conta4);    // exibe a conta com o saldo atualizado
 
-
     console.log("\nConsulta de Saldo");
     console.log(consultarSaldo(conta2, "125"));  // solicita o saldo, com PIN incorreto
     console.log(consultarSaldo(conta4, "246"));  // PIN correto, exibe o saldo
 
-
     console.log("\nTransferência");
-    console.log(transferencia(conta1, conta4, 250, "1234"));  //faz a transferÊncia
+    console.log(transferencia(conta1, conta3, 250, "1234"));  //faz a transferÊncia
     console.log(transferencia(conta2, conta3, 10000, "135")); // saldo insuficiente
     console.log(conta1);    // exibe as contas com os saldos atualizados
     console.log(transferencia(conta1, conta2, 50, "1234")); //faz a transferÊncia
@@ -230,6 +227,7 @@ function main () {
 
     console.log("\nConsulta Extrato Global");
     console.log(exibirExtratoGlobal());
+
 }
 
 main();
