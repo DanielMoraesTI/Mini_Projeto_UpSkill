@@ -17,9 +17,10 @@ const conta4 = new Conta('Elane Assis', 4600, '246');
 
 // array de contas (penso que seria mais interessante criar uma função criarContas, que "criasse as novas contas" e fizesse um push neste array)
 const contas = [conta1, conta2, conta3, conta4];
-//array pata armazenar todas as oprerações realizadas
+//array para armazenar todas as operações de levantamento e transferência
 const extratoGlobal = [];
-
+//valor para ser cliente VIP
+const valorMinimoVip = 5000;
 
 // Funções
 function levantar(conta, valor, pin) {
@@ -43,7 +44,6 @@ function depositar(conta, valor) {
     }
     conta.saldo += valor;
     conta.historico.push({tipo: "Depósito", valor: valor.toFixed(2) });
-    extratoGlobal.push({tipo: "Depósito", valor: valor.toFixed(2), nome: conta.nome});
     console.log(`Depósito no valor de ${valor.toFixed(2)} € efetuado com sucesso`);
 }
 
@@ -55,7 +55,6 @@ function consultarSaldo(conta, pin) {
     }   else {
         console.log(`Saldo atual: ${conta.saldo.toFixed(2)} €`);
         conta.historico.push({tipo: "Consultar saldo"});
-        extratoGlobal.push({tipo: "Consultar saldo", nome: conta.nome});
     }
 }
 
@@ -90,7 +89,6 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
     conta.pin = novoPin;
     console.log(conta.nome + ", seu PIN foi alterado com sucesso");
     conta.historico.push({tipo: "Alteração de senha"});
-    extratoGlobal.push({tipo: "Alteração de senha", nome: conta.nome});
  }
 
 
@@ -101,7 +99,6 @@ function transferencia(contaOrigem, contaDestino, valor, pin) {
 
 
 function clientesVip(arrayContas) {
-    const valorMinimoVip = 5000;
     // verifica as contas que possuem saldo acima do valor mínimo
     const contasVip = arrayContas.filter(c => c.saldo >= valorMinimoVip)
     // caso ninguém tenha o valor mínimo em conta
@@ -121,11 +118,7 @@ function clientesVip(arrayContas) {
 function exibirExtratoGlobal() {
     for (let i = 0; i < extratoGlobal.length; i++) {
         const operacao = extratoGlobal[i];
-        if (operacao.valor) {
-            console.log(`${operacao.nome} - ${operacao.tipo}: ${operacao.valor} €`);
-        } else {
-            console.log(`${operacao.nome} - ${operacao.tipo}`);
-        }
+        console.log(`${operacao.nome} - ${operacao.tipo}: ${operacao.valor} €`);
     }
 }
 
@@ -155,7 +148,7 @@ function quantidadeConsultaSaldo(conta) {
             contador++;
         }
     }
-        if (contador = 3) {
+        if (contador >= 3) {
             console.log(`Atenção ${conta.nome}, você já consultou seu saldo ${contador} vezes. Atingiu o limite de consultas gratuitas neste mês. Será cobrada uma taxa de 2 € por cada consulta adicional.`);
         } 
     return contador;
@@ -163,7 +156,6 @@ function quantidadeConsultaSaldo(conta) {
 
 // Terceira operação adicional (avisar quanto falta para se tornar um cliente VIP)
 function avisoClienteVip(conta) {
-    const valorMinimoVip = 5000;
     if (conta.saldo >= valorMinimoVip) {
         console.log(`Parabéns ${conta.nome}, você é um cliente VIP!`);
     } else {
@@ -171,10 +163,10 @@ function avisoClienteVip(conta) {
     }
 }
 
-avisoClienteVip(conta1);
+avisoClienteVip(conta4);
 
 
-function main () {
+/*function main () {
     // Testes
     console.log("Levantamento");
     levantar(conta1, 100, "1134"); // pin incorreto
@@ -227,7 +219,7 @@ function main () {
     console.log(conta4);
 }
 
-//main();
+main();
 
 
-//exibirExtratoGlobal();
+exibirExtratoGlobal();*/
