@@ -140,19 +140,14 @@ function poupanca(conta, pin) {
     extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
 }
 
-// Segunda operação adicional (avisar que chegou ao limite de consultas de saldo sem custos para o cliente)
-function quantidadeConsultaSaldo(conta) {
-    let contador = 0;
-    for (let i = 0; i < conta.historico.length; i++) {
-        if (conta.historico[i].tipo === "Consultar saldo") {
-            contador++;
-        }
-    }
-        if (contador >= 3) {
-            console.log(`Atenção ${conta.nome}, você já consultou seu saldo ${contador} vezes. Atingiu o limite de consultas gratuitas neste mês. Será cobrada uma taxa de 2 € por cada consulta adicional.`);
-        } 
-    return contador;
-    }
+//segunda operação adicionalconsulta para verificar taxa de câmbio para eventual conversão
+function consultaEuroReal(valorEuro) {
+    const taxaCambio = 6.20;
+    let valorConvertido = valorEuro * taxaCambio;
+    console.log(`O valor de ${valorEuro.toFixed(2)} € convertido para reais é R$ ${valorConvertido.toFixed(2)}`);
+    return valorConvertido;
+}
+
 
 // Terceira operação adicional (avisar quanto falta para se tornar um cliente VIP)
 function avisoClienteVip(conta) {
@@ -163,7 +158,7 @@ function avisoClienteVip(conta) {
     }
 }
 
-avisoClienteVip(conta4);
+
 
 
 /*function main () {
