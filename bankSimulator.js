@@ -146,7 +146,6 @@ function poupanca(conta, pin) {
     let rendimento = conta.saldo * (percentual / 100);
     conta.saldo += rendimento;  
     conta.historico.push({tipo: "Poupança", valor: rendimento.toFixed(2)});
-    extratoGlobal.push({tipo: "Poupança", valor: rendimento.toFixed(2), nome: conta.nome});
     let mensagemRendimento = `A sua poupança rendeu ${rendimento.toFixed(2)} €`;
     return mensagemRendimento;
 }
